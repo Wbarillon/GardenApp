@@ -1,0 +1,451 @@
+/* Resets */
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+p, h1, h2, h3 {
+    margin: 0;
+}
+
+button, input[type=submit] {
+    padding: 0;
+    background:transparent;
+    border: none;
+}
+
+input[type=radio] {
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+/* Fonts import */
+
+@import url('https://fonts.googleapis.com/css?family=Asap|Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+
+/* General style */
+
+body {
+    background-color: #c8fb96;
+}
+
+header {
+    background-color: #9BE84E;
+    /* Suggestion de Leslie #4F9B04 */
+}
+
+main {
+    font-family: 'Poppins', sans-serif;
+}
+
+footer {
+    text-align: right;
+    margin-right: 5%;
+}
+
+/* Header style */
+
+header {
+    font-family: 'Asap', sans-serif;
+}
+
+#header-container {
+    display: flex;
+    align-items: center;
+}
+
+#menu-burger {
+    font-size: 3rem;
+    margin-left: 5%;
+}
+@media all and (min-width:51rem) {
+    #menu-burger {
+        display: none;
+    }
+    #desktop-menu {
+        display: block !important;
+    }
+}
+
+#logo {
+    flex: 1;
+    margin: 3vh 6%;
+    font-size: 2.5rem;
+    color: black;
+    display: table;
+}
+
+#version {
+    margin: 0 3%;
+    color: #3A7CEF;
+    font-weight: bold;
+}
+
+#desktop-menu {
+    display: none;
+    border-top: solid 1px #EAE5E5;
+}
+
+#desktop-menu a {
+    font-size: 1.8rem;
+    color: black;
+    display: inline-block;
+    padding: 3vh 5%;
+    border-right: solid 1px #EAE5E5;
+}
+
+#mobile-menu {
+    position: absolute;
+    background-color: #9BE84E;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    display: none;
+    justify-content: space-around;
+}
+
+#mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8rem;
+}
+
+#mobile-menu nav a {
+    padding: 2vh;
+    color: black;
+}
+
+#mobile-menu span {
+    padding: 2vh;
+    display: table;
+}
+
+/* Breadcrumb style */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    justify-content: left;
+    font-family: 'Poppins', sans-serif;
+}
+
+.breadcrumb a {
+    padding: 1vh;
+}
+
+.breadcrumb span {
+    display: block;
+    margin: 0 1%;
+}
+
+.breadcrumb span:not(:first-child) {
+    font-size: 2.5rem;
+}
+
+/* General style for pages */
+
+.title {
+    font-size: 2.5rem !important;
+    font-weight: bold;
+}
+
+/* Style for sticky header on webpages with lists */
+/*
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky-listHeader {
+    position: fixed;
+    top: 17vh;
+    width: 100%;
+    background-color: #c8fb96;
+}
+.sticky-listHeader + .list-content {
+    padding-top: 32vh;
+}
+@media all and (max-width:51rem) {
+    .sticky-listHeader {
+        top: 9vh;
+    }
+    .sticky-listHeader + .list-content {
+        padding-top: 34vh !important;
+    }
+    #etat-jardin-detail-main .list-content {
+        padding-top: 7vh;
+    }
+}
+*/
+/* Style for webpages */
+
+.web-page-main .title {
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.web-page-main .link-form {
+    display: block;
+    text-align: right;
+    padding: 2vh;
+    font-size: 1.5rem;
+}
+
+.web-page-main .list {
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1px;
+}
+
+.web-page-main .list table {
+    width: 80%;
+}
+
+.web-page-main .list td {
+    padding: 1vh 5%;
+    font-size: 1.5rem;
+    overflow-wrap: anywhere;
+}
+
+.web-page-main .list td:first-of-type {
+    width: 50%;
+}
+
+.web-page-main .list ul {
+    border-right: solid 1px;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.web-page-main .list li {
+    padding: 1vh 3vh 1vh 3vh;
+}
+
+.web-page-main .list a {
+    padding: 2vh 1.5%;
+    display: table;
+}
+
+#etat-jardin-main ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#etat-jardin-main li {
+    padding: 0 2vh;
+}
+
+#etat-jardin-main table {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    border-collapse: collapse;
+    margin-top: 2vh;
+}
+
+#etat-jardin-main table thead {
+    border-bottom: solid 1px black;
+}
+
+#etat-jardin-main table th, #etat-jardin-main table td {
+    padding: 2vh;
+}
+
+#etat-jardin-main table td {
+    border-left: solid 1px;
+}
+
+#ressources-jardin-main form {
+    display: flex;
+    justify-content: center;
+    margin: 5vh 0;
+}
+
+#ressources-jardin-main form .searchbar {
+    display: flex;
+    width: 75%;
+}
+@media all and (min-width:51rem) {
+    #ressources-jardin-main form .searchbar {
+        width: 35%;
+    }
+}
+
+#ressources-jardin-main form input {
+    width: 100%;
+    border: none;
+    text-align: center;
+    font-size: 2rem;
+}
+
+#ressources-jardin-main form button {
+    background-color: white;
+}
+
+/* Style for form-pages */
+
+.form-main {
+    text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-main form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-main form p:not(:empty) {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2vh;
+    font-size: 2rem;
+}
+
+.form-main form hr {
+    width: 133px;
+    margin-bottom: 5vh;
+    border: solid 2px #9BE84E;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+
+.form-main form p:not(:empty) label, .form-main form b {
+    margin-bottom: 2vh;
+}
+
+.form-main .recap p:not(:first-of-type) {
+    display: initial;
+    margin: 1vh 0;
+}
+
+.form-main .recap p:not(:first-of-type)::after{
+    content: ". . . . .";
+    display: block;
+    color: #77B33B;
+}
+
+.form-main form .searchbar {
+    flex-direction: initial !important;
+    align-items: initial !important;
+}
+
+.form-main form .searchbar button {
+    background-color: white;
+}
+
+.form-main form ul {
+    display: inline-flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.form-main form ul li {
+    margin: 0vh 6vh 4vh 6vh;
+}
+
+.form-main form ul li label, .search-results label {
+    display: flex;
+    flex-direction: column;
+    padding: 0 6vh 2vh 6vh;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    font-size: 2rem;
+    background-color: white;
+}
+
+.form-main form ul li label:hover, .search-results label:hover, .checked {
+    background-color: #fb4eaf !important;
+    color: white !important;
+}
+
+.form-main form p input, .form-main form p select {
+    border: none;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.checkbox-field {
+    background-color: #fb4eaf;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.form-main form input[type = checkbox] {
+    width: 69px;
+    height: 69px;
+    margin: 0;
+}
+
+.form-main form div {
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 5vh;
+}
+
+.form-main .step-button {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    padding: 2vh;
+    font-size: 4rem;
+    color: white;
+    background-color: #fb4eaf;
+}
+
+.form-main .recap-button {
+    font-size: 2rem;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    padding: 2vh;
+    margin: 0 2vh;
+    color: white;
+    background-color: #fb4eaf;
+}
+
+.ui-widget {
+    font-size: 1.7rem !important;
+}

@@ -1,0 +1,9 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'Sensorialys_django_app/css/jquery-ui.css' %}"> 
+<script src="{% static 'Sensorialys_django_app/js/jquery-1.12.1.js' %}"></script>
+<script src="{% static 'Sensorialys_django_app/js/jquery-ui.js' %}"></script>
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker({dateFormat: 'dd-mm-yy'});
+});
+</script>

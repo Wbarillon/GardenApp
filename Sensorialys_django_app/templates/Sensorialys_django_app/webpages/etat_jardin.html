@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main id="etat-jardin-main" class="web-page-main">
+        <div class="link-form">
+            <a href="{% url 'ajout_culture' %}">Ajouter une culture</a>
+        </div>
+        <ul>
+            {% for contenant in contenants %}
+                <li>
+                    <p class="title">{{ contenant }}</p>
+                    <table>
+                        <thead>
+                            {% for label in labels %}
+                                <th>{{ label }}</th>
+                            {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for phase in phases %}
+                                {% if phase.type_contenant == contenant %}
+                                    <tr>
+                                        <th><a href="{% url 'etat_jardin_detail' phase.nom %}">{{phase.nom}}</a></th>
+                                        <td>{{phase.phase|default_if_none:""}}</td>
+                                        <td><a href="{% url 'actualiser_culture' phase.nom %}"><span class="material-icons">refresh</span></a></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>           
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="link-form">
+            <a href="{% url 'ajout_culture' %}">Ajouter une culture</a>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main id="one-step-form-main" class="form-main">
+        {% if data_front %}
+            <form action="" method="POST" class="recap">{% csrf_token %}
+                <p class="title">Récapitulatif</p>
+                <hr>
+                {% for label, value in data_front.items %}
+                    <p><b>{{ label }} :</b> {{ value|default:"Aucune donnée enregistrée" }}</p>
+                {% endfor %}
+                <div>
+                    <button name="recommencer" type="submit" class="recap-button"><span>Corriger</span></button>
+                    <button name="sauvegarder" type="submit" class="recap-button"><span>Enregistrer</span></button>
+                </div>
+            </form>
+        {% else %}
+            <form action="" method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <button name="confirmation_step"><span class="material-icons-round step-button">panorama_fish_eye</span></button>
+                </div>
+            </form>
+        {% endif %}
+    </main>
+{% endblock %}

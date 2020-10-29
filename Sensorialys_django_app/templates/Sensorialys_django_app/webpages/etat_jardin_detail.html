@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main id="etat-jardin-detail-main" class="web-page-main">
+        <div class="list-header">
+            <p class="title">{{ culture_name_data }}</p>
+            <div class="link-form">
+                <a href="{% url 'ajout_lot' culture_name_data %}">Ajouter un lot</a>
+            </div>
+        </div>
+        <div class="list-content">
+            {% for datum in data %}
+                {% if datum.quantite != 0 %}
+                    <div class="list">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>{{ labels.0 }} :</td>
+                                    <td>{{ datum.id_lot.id_graine.nom_usuel }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ labels.1 }} :</td>
+                                    <td>{{ datum.etat }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ labels.2 }} :</td>
+                                    <td>{{ datum.quantite|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ labels.3 }} :</td>
+                                    <td>{{ datum.remarques|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ labels.4 }} :</td>
+                                    <td>{{ datum.date|default_if_none:"" }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="{% url 'actualiser_lot' culture_name_data datum.id %}"><span class="material-icons">refresh</span></a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="link-form">
+            <a href="{% url 'ajout_lot' culture_name_data %}">Ajouter un lot</a>
+        </div>
+    </main>
+{% endblock %}

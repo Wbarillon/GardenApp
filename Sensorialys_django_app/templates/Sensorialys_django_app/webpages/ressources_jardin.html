@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main id="ressources-jardin-main" class="web-page-main">
+    <div class="list-header">
+        <p class="title">Ressources du jardin</p>
+        <div class="link-form">
+            <a href="{% url 'ajout_graine' %}">Ajouter une graine</a>
+        </div>
+        <form action="" method="GET" name="barre de recherche">
+            <p class="searchbar">
+                <input type="text" name="search_value">
+                <button type="submit"><span class="material-icons-round">search</span></button>
+            </p>
+        </form>
+    </div>
+    <div class="list-content">
+        {% for datum in data %}
+            <div class="list">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{{ labels.0 }} :</td>
+                            <td>{{ datum.nom_usuel }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ labels.1 }} :</td>
+                            <td>{{ datum.type_graine }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ labels.2 }} :</td>
+                            <td>{{ datum.niveau_stock|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ labels.3 }} :</td>
+                            <td>{{ datum.provenance|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ labels.4 }} :</td>
+                            <td>{{ datum.annee_de_recolte|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ labels.5 }} :</td>
+                            <td>{{ datum.remarques|default_if_none:"" }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{% url 'actualiser_graine' datum.id %}"><span class="material-icons">refresh</span></a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="link-form">
+        <a href="{% url 'ajout_graine' %}">Ajouter une graine</a>
+    </div>
+</main>
+{% endblock %}

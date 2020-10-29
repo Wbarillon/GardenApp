@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main id="ajout-lot-main" class="form-main">
+        {% if data_front %}
+        <form action="" method="POST" class="recap">{% csrf_token %}
+            <p class="title">Récapitulatif</p>
+            <hr>
+            {% for label, value in data_front.items %}
+                {% if label == "Graine" %}
+                    <p><b>{{ label }} :</b> <span>{{ value.espece_graine }} {{ value.variete_graine }}</span></p>
+                {% else %}
+                    <p><b>{{ label }} :</b> <span>{{ value|default:"Aucune donnée enregistrée" }}</span></p>
+                {% endif %}
+            {% endfor %}
+            <div>
+                <button name="recommencer" type="submit" class="recap-button"><span>Corriger</span></button>
+                <button name="sauvegarder" type="submit" class="recap-button"><span>Enregistrer</span></button>
+            </div>
+        </form>
+        {% else %}
+            {% if form.step == 2 %}
+                <form action="" method="GET" name="barre de recherche">
+                    <p class="title">Étape {{ form.step }}/{{ form.count }}</p>
+                    <hr>
+                    <p>Sélectionne la graine du lot</p>
+                    <p class="searchbar">
+                        <input type="text" name="search_value">
+                        <button type="submit" value="{{ form.step }}"><span class="material-icons-round">search</span></button>
+                    </p>
+                </form>
+                <form action="" method="POST">{% csrf_token %}
+                    {% if search_results_parent %}
+                        {% for result in search_results_parent %}
+                            <p class="search-results radio-check">
+                                <label>
+                                    <input type="radio" name="id_graine" value="{{result.id}}">
+                                    {{ result.espece_graine }} {{ result.variete_graine }} ({{ result.provenance|default_if_none:"" }}, {{ result.annee_recolte|default_if_none:"" }})
+                                </label>
+                            </p>
+                        {% endfor %}
+                    {% elif search_results_enfant %}
+                        {% for result in search_results_enfant %}
+                            <p class="search-results radio-check">
+                                <label>
+                                    <input type="radio" name="id_graine" value="{{result.id}}">
+                                    {{ result.id_lot.id_graine.espece_graine }} {{ result.id_lot.id_graine.variete_graine }} ({{ result.id_lot.nom_culture_initial }}, {{ result.quantite|default:"Aucune données enregistrées" }})
+                                </label>
+                            </p>
+                        {% endfor %}
+                    {% endif %}
+                    <div>
+                        <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round step-button">keyboard_arrow_left</span></button>
+                        <button name="next_step" type="submit" value="{{ form.step|add:'1' }}"><span class="material-icons-round step-button">keyboard_arrow_right</span></button>
+                    </div>
+                </form>
+            {% elif form.step == 3 %}
+                <form action="" method="POST">{% csrf_token %}
+                    <p class="title">Étape {{ form.step }}/{{ form.count }}</p>
+                    <hr>
+                    {% if quantite_lot %}
+                        <p>Quantité disponible : {{ quantite_lot }}</p>
+                    {% endif %}
+                    {{ form.form_fields.as_p }}
+                    {% if erreur_quantite %}
+                        <p>Impossible, il n'y a pas assez de graines.</p>
+                    {% endif %}
+                    <div>
+                        <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round step-button">keyboard_arrow_left</span></button>
+                        <button name="next_step" type="submit" value="{{ form.step|add:'1' }}"><span class="material-icons-round step-button">keyboard_arrow_right</span></button>
+                    </div>
+                </form>
+            {% elif form.step == 4 %}
+                <form action="" method="POST">{% csrf_token %}
+                    {% if lunar_calendar %}
+                        <p class="title">Étape {{ form.step }}/{{ form.count }}</p>
+                        <hr>
+                        <p>{{ form.form_fields.etat.label }}</p>
+                        <p>{{ form.form_fields.etat }}</p>
+                        {% include 'components/_lunarCalendar.html' %}
+                        <p>{{ form.form_fields.date.label }}</p>
+                        <p>{{ form.form_fields.date }}</p>
+                        <p>{{ form.form_fields.phase_lunaire.label }}</p>
+                        <p>{{ form.form_fields.phase_lunaire }}</p>
+                        <p>{{ form.form_fields.constellation.label }}</p>
+                        <p>{{ form.form_fields.constellation }}</p>
+                        <p>{{ form.form_fields.perigee_apogee.label }}</p>
+                        <p>{{ form.form_fields.perigee_apogee }}</p>
+                        <p>{{ form.form_fields.lunar_node.label }}</p>
+                        <p class="checkbox-field">{{ form.form_fields.lunar_node }}</p>
+                        <div>
+                            <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round step-button">keyboard_arrow_left</span></button>
+                            <button name="confirmation_step" type="submit"><span class="material-icons-round step-button">panorama_fish_eye</span></button>
+                        </div>
+                    {% else %}
+                        <p class="title">Étape {{ form.step }}/{{ form.count }}</p>
+                        <hr>
+                        <p>{{ form.form_fields.etat.label }}</p>
+                        <p>{{ form.form_fields.etat }}</p>
+                        <div>
+                            <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round step-button">keyboard_arrow_left</span></button>
+                            <button name="next_step" type="submit" value="{{ form.step }}"><span class="material-icons-round step-button">keyboard_arrow_right</span></button>
+                        </div>
+                    {% endif %}
+                </form>
+            {% else %}
+                <form action="" method="POST">{% csrf_token %}
+                    <p class="title">Étape {{ form.step }}/{{ form.count }}</p>
+                    <hr>
+                    {{ form.form_fields.as_p }}
+                    {% if form.step == 1 %}
+                        <div>
+                            <button name="next_step" type="submit" value="{{ form.step|add:'1' }}"><span class="material-icons-round step-button">keyboard_arrow_right</span></button>
+                        </div>
+                    {% elif form.step == form.count %}
+                        <div>
+                            <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round">keyboard_arrow_left</span></button>
+                            <button name="confirmation_step" type="submit"><span class="material-icons-round step-button">panorama_fish_eye</span></button>
+                        </div>
+                    {% else %}
+                        <div>
+                            <button name="previous_step" type="submit" value="{{ form.step|add:'-1' }}"><span class="material-icons-round step-button">keyboard_arrow_left</span></button>
+                            <button name="next_step" type="submit" value="{{ form.step|add:'1' }}"><span class="material-icons-round step-button">keyboard_arrow_right</span></button>
+                        </div>
+                    {% endif %}
+                </form>
+            {% endif %}
+        {% endif %}
+    </main>
+{% endblock %}

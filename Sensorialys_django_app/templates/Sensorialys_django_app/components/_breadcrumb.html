@@ -1,0 +1,29 @@
+{% comment %}
+    This breadcrumb is quite simple and robust. However, it doesn't work with name that have spaces. For instance, Home > État du jardin > cabane 2 doesn't work.
+    Home > État du jardin > cabane-2 works.
+{% endcomment %}
+
+{% url 'index' as index %}
+{% url 'etat_jardin' as etat_jardin %}
+{% url 'ajout_culture' as ajout_culture %}
+{% url 'actualiser_culture' culture_name_data as actualiser_culture %}
+{% url 'etat_jardin_detail' culture_name_data as etat_jardin_detail %}
+{% url 'ajout_lot' culture_name_data as ajout_lot %}
+{% url 'actualiser_lot' culture_name_data id_data as actualiser_lot %}
+{% url 'ressources_jardin' as ressources_jardin %}
+{% url 'ajout_graine' as ajout_graine %}
+{% url 'actualiser_graine' id_data as actualiser_graine %}
+
+{% if request.path != index %}
+<div class="breadcrumb">
+    <a href="{% url 'index' %}"><span class="material-icons-round">home</span></a>
+    {% if request.path == etat_jardin or request.path == ajout_culture  or request.path == actualiser_culture %}
+        <span>&rsaquo;</span><a href="{% url 'etat_jardin' %}">État du jardin</a>
+    {% elif request.path == etat_jardin_detail or request.path == ajout_lot or request.path == actualiser_lot %}
+        <span>&rsaquo;</span><a href="{% url 'etat_jardin' %}">État du jardin</a>
+        <span>&rsaquo;</span><a href="{% url 'etat_jardin_detail' culture_name_data %}">{{ culture_name_data }}</a>
+    {% elif request.path == ressources_jardin or request.path == ajout_graine or request.path == actualiser_graine %}
+        <span>&rsaquo;</span><a href="{% url 'ressources_jardin' %}">Ressources du jardin</a>
+    {% endif %}
+{% endif %}
+</div>
