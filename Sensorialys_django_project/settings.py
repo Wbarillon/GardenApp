@@ -28,7 +28,6 @@ GIT_REPO = os.getenv('GIT_REPO')
 DEBUG = True
 
 # Security configuration
-
 SECURE_HSTS_SECONDS = 31536000 # 60 = 1 minute, 31536000 = 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
