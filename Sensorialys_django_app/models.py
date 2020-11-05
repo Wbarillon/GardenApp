@@ -82,8 +82,7 @@ class Graine(models.Model):
 
 class Culture(models.Model):
 
-    id = models.AutoField(primary_key = True)
-    nom = models.CharField(verbose_name = 'Nom', max_length = 30, null = True, blank = True)
+    nom = models.CharField(primary_key = True, verbose_name = 'Nom', max_length = 30)
     type_contenant = models.CharField(verbose_name = 'Type de contenant', max_length = 9, null = True, blank = True)
 
     def __str__(self):
