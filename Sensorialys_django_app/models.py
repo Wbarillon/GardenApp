@@ -95,9 +95,9 @@ class Culture(models.Model):
 class PhaseCulture(models.Model):
 
     id = models.AutoField(primary_key = True)
-    nom_culture = models.ForeignKey('Culture', on_delete = models.PROTECT, verbose_name = 'Culture', related_name = 'phase_culture_nom_culture', null = False, blank = False)
-    phase = models.CharField(verbose_name = 'Phase', max_length = 7, null = True, blank = False)
-    phase_date = models.DateField(verbose_name = 'Date de changement de phase', null = False, blank = False)
+    nom_culture = models.ForeignKey('Culture', on_delete = models.PROTECT, verbose_name = 'Culture', related_name = 'phase_culture_nom_culture', null = True, blank = True)
+    phase = models.CharField(verbose_name = 'Phase', max_length = 7, null = True, blank = True)
+    phase_date = models.DateField(verbose_name = 'Date de changement de phase', null = True, blank = True)
 
     def __int__(self):
         return self.id
