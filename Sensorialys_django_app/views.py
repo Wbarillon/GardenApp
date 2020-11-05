@@ -11,8 +11,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import os
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+from django.conf.settings import GIT_REPO
 
 from .models import *
 from .forms import *
@@ -27,7 +26,7 @@ def update(request):
         stored on PythonAnywhere in the git.Repo() as parameter.
         Here the name of my directory is "test.pythonanywhere.com"
         '''
-        repo = git.Repo(os.getenv('GIT_REPO')) 
+        repo = git.Repo(GIT_REPO) 
         origin = repo.remotes.origin
 
         origin.pull()
