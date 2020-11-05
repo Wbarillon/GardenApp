@@ -1,15 +1,41 @@
 from datetime import datetime as dt
 
 from django.shortcuts import render, redirect
-from formtools.wizard.views import SessionWizardView
 from django.db.models import Q
 from django.db.models import Count
 from django.db.models import Max
+
+# Webhook
+import git
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+import os
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 from .models import *
 from .forms import *
 
 # Create your views here.
+
+@csrf_exempt
+def update(request):
+    if request.method == "POST":
+        '''
+        pass the path of the diectory where your project will be 
+        stored on PythonAnywhere in the git.Repo() as parameter.
+        Here the name of my directory is "test.pythonanywhere.com"
+        '''
+        repo = git.Repo(os.getenv('GIT_REPO')) 
+        origin = repo.remotes.origin
+
+        origin.pull()
+
+        return HttpResponse("Updated code on PythonAnywhere")
+    else:
+        return HttpResponse("Couldn't update the code on PythonAnywhere")
+
 
 def index(request):
     template_name = 'webpages/index.html'

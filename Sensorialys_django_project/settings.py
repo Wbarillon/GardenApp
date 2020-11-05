@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
-load_dotenv()
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -108,12 +108,6 @@ DATABASES = {
     }
 }
 """
-'''
-from django.db import connection
-connection.cursor()
-connection.connection.text_factory = lambda x: str(x, "utf-8", "ignore")
-#connection.connection.text_factory = str
-'''
 
 DATABASES = {
     'default': {

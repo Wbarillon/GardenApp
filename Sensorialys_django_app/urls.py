@@ -44,7 +44,12 @@ forms_patterns = [
     path('ressources_jardin/actualiser_graine/<int:id>', views.actualiser_graine, name = 'actualiser_graine')
 ]
 
+github_webhook_patterns = [
+    path('update_server/', views.update, name = 'update')
+]
+
 urlpatterns = [
     path('', include(webpages_patterns)),
-    path('', include(forms_patterns))
+    path('', include(forms_patterns)),
+    path('', include(github_webhook_patterns))
 ]
